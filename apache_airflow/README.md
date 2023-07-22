@@ -29,8 +29,7 @@ airflow webserver -p 8080 // 웹서버 실행
 airflow scheduler // Dags 실행
 ```
 
->> 이 두 명령어를 서로 다른 쉘에서 실행
-
+> 이 두 명령어를 서로 다른 쉘에서 실행
 
 ## 활용 방법
 - 위 설치 과정에서 문제가 없었다면 리눅스 우분투의 경우 Home 경로에 airflow라는 폴더가 만들어진다. 그 폴더 내부에 ‘dags’라는 이름의 폴더를 직접 생성하고, 그 안에 DAG 문법에 맞는 Python 파일을 생성하면 Airflow가 인식한다.
