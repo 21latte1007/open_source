@@ -8,22 +8,22 @@ https://airflow.apache.org/docs/apache-airflow/stable/installation/installing-fr
 pip install "apache-airflow[celery]==2.6.2" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.6.2/constraints-3.7.txt"
 ```
 
->> Airflow를 pip로 설치한다.
+> Airflow를 pip로 설치한다.
 ```
 airflow db init
 ```
 
->> DB 초기화
+> DB 초기화
 ```
 airflow user create -username admin -firstname admin -lastname admin -role Admin -email email@email.com -password admin
 ```
 
->> “–role Admin” 부분에서 관리자 권한을 부여, admin 유저 생성
+> “–role Admin” 부분에서 관리자 권한을 부여, admin 유저 생성
 ```
 export AIRFLOW_HOME=~/airflow
 ```
 
->> 환경변수 설정
+> 환경변수 설정
 ```
 airflow webserver -p 8080 // 웹서버 실행
 airflow scheduler // Dags 실행
