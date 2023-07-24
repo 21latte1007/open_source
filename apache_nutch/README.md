@@ -12,13 +12,13 @@ Apache Nutch는 Window 환경에 호환되지 않고, 실행시키려면 특별�
 +) Apache Nutch는 Apache Tika라는 다양한 문서를 크롤링할 수 있는 Apache의 다른 오픈소스 를 가져오는데, 이 Apache Tika는 HTML, PDF, Docx 등 다양한 형태의 문서를 파싱할 수 있다.
 
 ### Nutch-indexer 설정
-regex-urlfilter : seed.txt에 기입한 URL들을 여기에서 정규식으로 검증한다.
-suffix-urlfilter.txt : 크롤링하지 않을 확장자들을 설정.
-prefix-urlfilter.txt : Default는 http:// 만을 크롤링. https:// 등을 추가로 기입할 수 있다.
-nutch-site.xml : robots 설정 등 크롤링을 진행하는데 기본적인 설정을 다룬다.
-index-writer.xml : Plugin 설정. 여기에서 Google_cloud_search와 관련된 Plugin을 인식시켜야 Google cloud search와 연동시킬 수 있다.
-parse-plugins.xml : Parsing을 진행할 문서 형식들에 대한 mimeType 설정을 기입한다.
-mimetype-filter.txt : 어떠한 형태의 문서를 파싱할 것인지 설정. Default 설정으로는 HTML만이 되 어 있고, Apache Nutch를 Default로 실행하면 HTML만을 제대로 크롤링하고 그 외의 문서는 모든 문자가 깨지는 등 변환이 제대로 이루어지지 않는다.
+- regex-urlfilter : seed.txt에 기입한 URL들을 여기에서 정규식으로 검증한다.
+- suffix-urlfilter.txt : 크롤링하지 않을 확장자들을 설정.
+- prefix-urlfilter.txt : Default는 http:// 만을 크롤링. https:// 등을 추가로 기입할 수 있다.
+- nutch-site.xml : robots 설정 등 크롤링을 진행하는데 기본적인 설정을 다룬다.
+- index-writer.xml : Plugin 설정. 여기에서 Google_cloud_search와 관련된 Plugin을 인식시켜야 Google cloud search와 연동시킬 수 있다.
+- parse-plugins.xml : Parsing을 진행할 문서 형식들에 대한 mimeType 설정을 기입한다.
+- mimetype-filter.txt : 어떠한 형태의 문서를 파싱할 것인지 설정. Default 설정으로는 HTML만이 되 어 있고, Apache Nutch를 Default로 실행하면 HTML만을 제대로 크롤링하고 그 외의 문서는 모든 문자가 깨지는 등 변환이 제대로 이루어지지 않는다.
 
 ### Nutch-indexer 실행
 ```
@@ -33,7 +33,7 @@ mimetype-filter.txt : 어떠한 형태의 문서를 파싱할 것인지 설정. 
 [ bin/nutch readseg -dump [설정한 폴더명]/segments/[크롤링한 날짜] dump ]
 ```
 optional : -nofetch, -nogenerate -noparse -noparsedata -noparsetext -nocontent
--> binary로 추출된 크롤링 데이터를 읽을 수 있는 형태로 변환. Optional 파라미터로 원하는 데이 터만을 변환시킬 수 있다.
+-> binary로 추출된 크롤링 데이터를 읽을 수 있는 형태로 변환. Optional 파라미터로 원하는 데이터만을 변환시킬 수 있다.
 
 ## Architecture
 1. seed.txt에서 URL 목록을 읽고 URL을 regex-urlfilter 정규식과 비교하고 지원되는 URL로 crawldb를 업데이트.
