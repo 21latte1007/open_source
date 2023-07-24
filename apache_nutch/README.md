@@ -1,4 +1,41 @@
-## Apache Nutch
+# Apache Nutch
+## Process
+1. seed.txt에서 URL 목록을 읽고 URL을 regex-urlfilter 정규식과 비교해 지원되는 URL로 crawldb를 업데이트.
+2. Bin/nutch에서 [설정한 폴더명] 아래에 /crawldb, /segments 폴더를 생성하고 가져올 수 있는 URL의 목록을 만들고, /segments 아래에 현재 시간 폴더 생성.
+3. 웹페이지 데이터 또는 이미지를 binary 데이터로 가져와 content에 저장.
+4. Content의 저장물은 parse_data와 parse_text로 분리.
++) crawldb : URL에 대한 정보가 저장되는 곳.
+> segment 분석 완료 후 최근에 가져온 URL에서 새로 찾은 링크로 업데이트. crawldb는 URL과 fetch_state, modified_time 이 기록.
+
+### Ubuntu 20.04 + Apache Nutch 1.15
+Apache Nutch는 Window 환경에 호환되지 않고, 실행시키려면 특별한 추가 프로그램 설치 등이 필요하다. 그렇기에 Ubuntu 20.04 환경에서 실행한다.
++) Apache Nutch는 Apache Tika라는 다양한 문서를 크롤링할 수 있는 Apache의 다른 오픈소스 를 가져오는데, 이 Apache Tika는 HTML, PDF, Docx 등 다양한 형태의 문서를 파싱할 수 있다.
+
+### Nutch-indexer 설정
+regex-urlfilter : seed.txt에 기입한 URL들을 여기에서 정규식으로 검증한다.
+suffix-urlfilter.txt : 크롤링하지 않을 확장자들을 설정.
+prefix-urlfilter.txt : Default는 http:// 만을 크롤링. https:// 등을 추가로 기입할 수 있다.
+nutch-site.xml : robots 설정 등 크롤링을 진행하는데 기본적인 설정을 다룬다.
+index-writer.xml : Plugin 설정. 여기에서 Google_cloud_search와 관련된 Plugin을 인식시켜야 Google cloud search와 연동시킬 수 있다.
+parse-plugins.xml : Parsing을 진행할 문서 형식들에 대한 mimeType 설정을 기입한다.
+mimetype-filter.txt : 어떠한 형태의 문서를 파싱할 것인지 설정. Default 설정으로는 HTML만이 되 어 있고, Apache Nutch를 Default로 실행하면 HTML만을 제대로 크롤링하고 그 외의 문서는 모든 문자가 깨지는 등 변환이 제대로 이루어지지 않는다.
+
+### Nutch-indexer 실행
+```
+[ bin/crawl -I -s urls/ [설정한 폴더명]/ [원하는 Depth] ]
+```
+-> urls/seed.txt에 적힌 URL을 기반으로 조회할 수 있는 URL들을 크롤링하는 작업 시작. Depth 옵션이 1이라면 해당 URL만을 조회, 2라면 해당 URL에서 넘어갈 수 있는 URL들도 1번 조회. 3이 라면 2회 파고들 수 있는 URL까지 조회할 수 있다.
+```
+[ bin/nutch dump -outputDir data/output -segment [설정한 폴더명]/segments ]
+```
+-> binary로 추출된 크롤링 데이터를 읽을 수 있는 형태로 변환. /segments 아래의 모든 크롤링 데이터가 전부 한꺼번에 변환된다.
+```
+[ bin/nutch readseg -dump [설정한 폴더명]/segments/[크롤링한 날짜] dump ]
+```
+optional : -nofetch, -nogenerate -noparse -noparsedata -noparsetext -nocontent
+-> binary로 추출된 크롤링 데이터를 읽을 수 있는 형태로 변환. Optional 파라미터로 원하는 데이 터만을 변환시킬 수 있다.
+
+## Architecture
 1. seed.txt에서 URL 목록을 읽고 URL을 regex-urlfilter 정규식과 비교하고 지원되는 URL로 crawldb를 업데이트.
 2. bin/nutch에서 crawldb, segments 등을 생성하고 가져올 수 있는 URL의 목록을 만들어 segments 아래에 현재 시간으로 dir을 만든다.
 3. 웹페이지 데이터 또는 이미지를 binary 데이터로 가져와 content에 저장.
