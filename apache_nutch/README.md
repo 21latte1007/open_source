@@ -36,6 +36,9 @@ optional : -nofetch, -nogenerate -noparse -noparsedata -noparsetext -nocontent
 -> binary로 추출된 크롤링 데이터를 읽을 수 있는 형태로 변환. Optional 파라미터로 원하는 데이터만을 변환시킬 수 있다.
 
 ## Architecture
+<img width="740" alt="Apache Nutch 아키텍쳐 시범" src="https://github.com/21latte1007/open_source/assets/136875503/584636c0-7b46-4a82-aba7-e52304e1eb3d">
+<img width="912" alt="Apache Nutch 아키텍쳐 최종" src="https://github.com/21latte1007/open_source/assets/136875503/f2b9ed69-52cd-49bd-adf1-ac83b6294729">
+
 1. seed.txt에서 URL 목록을 읽고 URL을 regex-urlfilter 정규식과 비교하고 지원되는 URL로 crawldb를 업데이트.
 2. bin/nutch에서 crawldb, segments 등을 생성하고 가져올 수 있는 URL의 목록을 만들어 segments 아래에 현재 시간으로 dir을 만든다.
 3. 웹페이지 데이터 또는 이미지를 binary 데이터로 가져와 content에 저장.
