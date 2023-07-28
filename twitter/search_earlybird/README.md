@@ -18,6 +18,9 @@ Searcher : 쿼리 대기 시간을 최소화하기 위해 캐싱 및 병렬 쿼�
 - 문서 ID 목록에 대한 용어 간의 매핑을 저장하는 역색인. 해시 맵 형태(고유 용어, 트윗 목록)
 - Doc ID 목록으로 저장소를 최적화하는 게시물 목록
 
+## Architecture
+![Twitter EarlyBird Architecture](https://github.com/21latte1007/open_source/assets/136875503/d276f29f-d143-447d-ba0c-507dff60313d)
+
 ## 코드 구조
 ### Root Dir
 서버 구현 및 관련 클래스 : 검색 클래스, CPU 품질 요소, 서버 관리, 인덱스 구성, 기본 클래스, 서버 시작
