@@ -19,7 +19,7 @@ Searcher : 쿼리 대기 시간을 최소화하기 위해 캐싱 및 병렬 쿼�
 - Doc ID 목록으로 저장소를 최적화하는 게시물 목록
 
 ## Architecture
-![Twitter EarlyBird Architecture](https://github.com/21latte1007/open_source/assets/136875503/d276f29f-d143-447d-ba0c-507dff60313d)
+![Twitter EarlyBird Architecture](https://github.com/21latte1007/open_source/assets/136875503/b2a4cc0e-2781-4af6-8ca6-8d21a36b6101)
 
 ## 코드 구조
 ### Root Dir
